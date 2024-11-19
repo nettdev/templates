@@ -10,9 +10,9 @@
         "type": "parameter",
         "description": "The name of Command code file and class.",
         "datatype": "text",
-        "replaces": "SomeOperarion",
-        "fileRename": "SomeOperarion",
-        "defaultValue": "SomeOperarion"
+        "replaces": "SomeOperation",
+        "fileRename": "SomeOperation",
+        "defaultValue": "SomeOperation"
       },
       "aggregateName":{
         "type": "parameter",

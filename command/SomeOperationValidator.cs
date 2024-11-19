@@ -1,8 +1,8 @@
 namespace NettDev.Namespace;
 
-public sealed class SomeOperarionValidator : IValidator<SomeOperarionRequest>
+public sealed class SomeOperationValidator : IValidator<SomeOperationRequest>
 {
-    public SomeOperarionValidator()
+    public SomeOperationValidator()
     {
     }
 }

@@ -1,7 +1,6 @@
 namespace NettDev.Namespace;
 
-public sealed record SomeOperarionRequest
+public sealed record SomeOperationRequest
 {
-    public {Aggregate} MapToAggregate() =>
-        new();
+
 }

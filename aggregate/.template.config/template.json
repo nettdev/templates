@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "Common", "Clean Architecture", "Domain Drive Design" ],
+    "identity": "Nett.Templates",
+    "name": "Nett Dev Templates",
+    "shortName": "nett.aggregate",
+    "symbols": {
+      "aggregateName":{
+        "type": "parameter",
+        "description": "The name of aggregate code file and class.",
+        "datatype": "text",
+        "replaces": "SomeAggregate",
+        "fileRename": "SomeAggregate",
+        "defaultValue": "SomeAggregate"
+      },
+      "valueObjectName":{
+        "type": "parameter",
+        "description": "The name of value object code file and class.",
+        "datatype": "text",
+        "replaces": "SomeValueObject",
+        "fileRename": "SomeValueObject",
+        "defaultValue": ""
+      },
+      "enumerationName":{
+        "type": "parameter",
+        "description": "The name of enumeration code file and class.",
+        "datatype": "text",
+        "replaces": "SomeEnumeration",
+        "fileRename": "SomeEnumeration",
+        "defaultValue": ""
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "NettDev.Namespace"
+      },
+      "valueObjectParameter": {
+        "type": "derived",
+        "valueSource": "valueObjectName",
+        "valueTransform": "first_lc",
+        "replaces": "valueObjectParameter"
+      },
+      "enumerationParameter": {
+        "type": "derived",
+        "valueSource": "enumerationName",
+        "valueTransform": "first_lc",
+        "replaces": "enumerationParameter"
+      }
+    },
+    "sources": [
+      {
+        "modifiers": [
+          {
+            "condition": "(valueObjectName == \"\")",
+            "exclude": [
+              "SomeValueObject.cs"
+            ]
+          },
+          {
+            "condition": "(enumerationName == \"\")",
+            "exclude": [
+              "SomeEnumeration.cs"
+            ]
+          }
+        ]
+      }
+    ],
+    "forms": {
+      "first_lc": {
+        "identifier": "firstLowerCaseInvariant"
+      }
+    }
+  }

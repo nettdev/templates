@@ -4,11 +4,11 @@
     "classifications": [ "Common", "Clean Architecture", "Domain Drive Design" ],
     "identity": "Nett.Templates",
     "name": "Nett Dev Templates",
-    "shortName": "nett.query",
+    "shortName": "nett.endpoint",
     "symbols": {
-      "queryName":{
+      "endpointName":{
         "type": "parameter",
-        "description": "The name of Command code file and class.",
+        "description": "The name of endpoint code file and class.",
         "datatype": "text",
         "replaces": "SomeOperation",
         "fileRename": "SomeOperation",
@@ -18,14 +18,33 @@
         "type": "parameter",
         "description": "The name of Aggregate code file and class.",
         "datatype": "text",
-        "replaces": "{Aggregate}",
-        "fileRename": "{Aggregate}",
+        "replaces": "Aggregate",
+        "fileRename": "Aggregate",
         "defaultValue": "Aggregate"
+      },
+      "removeValidator": {
+        "type": "parameter",
+        "description": "Include validator for endpoint",
+        "datatype": "bool",
+        "defaultValue": "false",
+        "displayName": "Remove validator"
       },
       "namespace": {
         "type": "parameter",
         "description": "Namespace for the generated code",
         "replaces": "NettDev.Namespace"
       }
-    }
+    },
+    "sources": [
+      {
+        "modifiers": [
+          {
+            "condition": "(removeValidator)",
+            "exclude": [
+              "SomeOperationValidator.cs"
+            ]
+          }
+        ]
+      }
+    ]
   }
