@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "App", "Query" ],
+    "identity": "Nett.Query",
+    "name": "Nett query template",
+    "shortName": "nett.query",
+    "symbols": {
+      "queryName":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "removeSpaces",
+        "replaces": "SomeOperation",
+        "fileRename": "SomeOperation",
+        "defaultValue": "SomeOperation"
+      },
+      "aggregateName":{
+        "type": "parameter",
+        "description": "The name of Aggregate code file and class.",
+        "datatype": "text",
+        "replaces": "AggregateName",
+        "fileRename": "AggregateName",
+        "defaultValue": "AggregateName"
+      },
+      "aggregateNameVar":{
+        "type": "derived",
+        "valueSource": "aggregateName",
+        "valueTransform": "first_lc",
+        "replaces": "AggregateNameVar",
+        "fileRename": "AggregateNameVar",
+        "defaultValue": "AggregateNameVar"
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "NettDev.Namespace"
+      }
+    },
+    "forms": {
+      "first_lc": {
+        "identifier": "firstLowerCaseInvariant"
+      },
+      "removeSpaces": {
+        "identifier": "replace",
+        "pattern": "\\ ",
+        "replacement": ""
+      }
+    }
+  }

@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "App", "Repository" ],
+    "identity": "Nett.Repository",
+    "name": "Nett repository template",
+    "shortName": "nett.repository",
+    "symbols": {
+      "aggregateName":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "removeSpaces",
+        "replaces": "Aggregate",
+        "fileRename": "Aggregate",
+        "defaultValue": "Aggregate"
+      },
+      "aggregateNameVar":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "first_lc",
+        "replaces": "AggregateVar",
+        "fileRename": "AggregateVar",
+        "defaultValue": "AggregateVar"
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "NettDev.Namespace"
+      }
+    },
+    "forms": {
+      "first_lc": {
+        "identifier": "firstLowerCaseInvariant"
+      },
+      "removeSpaces": {
+        "identifier": "replace",
+        "pattern": "\\ ",
+        "replacement": ""
+      }
+    }
+  }

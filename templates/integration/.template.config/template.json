@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "App", "IntegrationTest" ],
+    "identity": "Nett.Integration",
+    "name": "Nett integration test template",
+    "shortName": "nett.integration",
+    "symbols": {
+      "aggregateName":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "removeSpaces",
+        "replaces": "AggregateName",
+        "fileRename": "AggregateName",
+        "defaultValue": "AggregateName"
+      },
+      "commandName":{
+        "type": "parameter",
+        "description": "The name of command code file and class.",
+        "datatype": "text",
+        "replaces": "CommandName",
+        "defaultValue": "Aggregate"
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "{NettDev.Namespace}"
+      },
+      "CommandNameVar": {
+        "type": "derived",
+        "valueSource": "commandName",
+        "valueTransform": "first_lc",
+        "replaces": "CommandNameVar"
+      }
+    },
+    "forms": {
+      "first_lc": {
+        "identifier": "firstLowerCaseInvariant"
+      },
+      "removeSpaces": {
+        "identifier": "replace",
+        "pattern": "\\ ",
+        "replacement": ""
+      }
+    }
+  }

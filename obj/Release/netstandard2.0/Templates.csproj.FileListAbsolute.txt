@@ -1,0 +1,11 @@
+/Users/moura/dev/templates/bin/Release/netstandard2.0/Templates.deps.json
+/Users/moura/dev/templates/bin/Release/netstandard2.0/Templates.dll
+/Users/moura/dev/templates/bin/Release/netstandard2.0/Templates.pdb
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.csproj.AssemblyReference.cache
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.GeneratedMSBuildEditorConfig.editorconfig
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.AssemblyInfoInputs.cache
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.AssemblyInfo.cs
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.csproj.CoreCompileInputs.cache
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.sourcelink.json
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.dll
+/Users/moura/dev/templates/obj/Release/netstandard2.0/Templates.pdb

@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "App", "Endpoints" ],
+    "identity": "Nett.Endpoint",
+    "name": "Nett endpoint template",
+    "shortName": "nett.endpoint",
+    "symbols": {
+      "endpointName":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "removeSpaces",
+        "replaces": "Aggregate",
+        "fileRename": "Aggregate",
+        "defaultValue": "Aggregate"
+      },
+      "aggregateName":{
+        "type": "parameter",
+        "description": "The name of Aggregate code file and class.",
+        "datatype": "text",
+        "replaces": "Aggregate",
+        "fileRename": "Aggregate",
+        "defaultValue": "Aggregate"
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "NettDev.Namespace"
+      }
+    },
+    "forms": {
+      "removeSpaces": {
+        "identifier": "replace",
+        "pattern": "\\ ",
+        "replacement": ""
+      }
+    }
+  }

@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Net Dev",
+    "classifications": [ "App", "Command" ],
+    "identity": "Nett.Command",
+    "name": "Nett command template",
+    "shortName": "nett.command",
+    "symbols": {
+      "commandName":{
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "removeSpaces",
+        "replaces": "Action",
+        "fileRename": "Action",
+        "defaultValue": "Action"
+      },
+      "aggregateName":{
+        "type": "parameter",
+        "description": "The name of Aggregate code file and class.",
+        "datatype": "text",
+        "replaces": "{Aggregate}",
+        "fileRename": "{Aggregate}",
+        "defaultValue": "Aggregate"
+      },
+      "removeValidator": {
+        "type": "parameter",
+        "description": "Include validator for command",
+        "datatype": "bool",
+        "defaultValue": "false",
+        "displayName": "Remove validator"
+      },
+      "namespace": {
+        "type": "parameter",
+        "description": "Namespace for the generated code",
+        "replaces": "NettDev.Namespace"
+      },
+      "aggregateNameParamenter": {
+        "type": "derived",
+        "valueSource": "name",
+        "valueTransform": "first_lc",
+        "replaces": "aggregateParameter"
+      }
+    },
+    "sources": [
+      {
+        "modifiers": [
+          {
+            "condition": "(removeValidator)",
+            "exclude": [
+              "ValidatorName.cs"
+            ]
+          }
+        ]
+      }
+    ],
+    "forms": {
+      "first_lc": {
+        "identifier": "firstLowerCaseInvariant"
+      },
+      "removeSpaces": {
+        "identifier": "replace",
+        "pattern": "\\ ",
+        "replacement": ""
+      }
+    }
+  }
