@@ -1,37 +1,32 @@
 {
     "$schema": "http://json.schemastore.org/template",
-    "author": "Net Dev",
+    "author": "Jeziel Moura",
     "classifications": [ "App", "Repository" ],
     "identity": "Nett.Repository",
-    "name": "Nett repository template",
+    "name": "Nett Repository template",
     "shortName": "nett.repository",
     "symbols": {
-      "aggregateName":{
+      "nameDerived":{
         "type": "derived",
         "valueSource": "name",
         "valueTransform": "removeSpaces",
-        "replaces": "Aggregate",
-        "fileRename": "Aggregate",
-        "defaultValue": "Aggregate"
+        "replaces": "NameOverride",
+        "fileRename": "NameOverride",
+        "defaultValue": "Name"
       },
-      "aggregateNameVar":{
+      "projectName": {
+        "type": "parameter",
+        "description": "Project name for the generated code",
+        "replaces": "ProjectNameOverride"
+      },
+      "nameField": {
         "type": "derived",
         "valueSource": "name",
         "valueTransform": "first_lc",
-        "replaces": "AggregateVar",
-        "fileRename": "AggregateVar",
-        "defaultValue": "AggregateVar"
-      },
-      "namespace": {
-        "type": "parameter",
-        "description": "Namespace for the generated code",
-        "replaces": "NettDev.Namespace"
+        "replaces": "NameFieldOverride"
       }
     },
     "forms": {
-      "first_lc": {
-        "identifier": "firstLowerCaseInvariant"
-      },
       "removeSpaces": {
         "identifier": "replace",
         "pattern": "\\ ",

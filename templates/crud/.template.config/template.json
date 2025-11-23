@@ -1,10 +1,10 @@
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Jeziel Moura",
-    "classifications": [ "App", "Aggregate" ],
-    "identity": "Nett.Aggregate",
-    "name": "Nett aggregate template",
-    "shortName": "nett.aggregate",
+    "classifications": [ "App", "Crud" ],
+    "identity": "Nett.Crud",
+    "name": "Nett Crud template",
+    "shortName": "nett.crud",
     "symbols": {
       "nameDerived":{
         "type": "derived",

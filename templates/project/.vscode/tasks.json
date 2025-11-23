@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": ["build", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
+            "presentation": {
+                "reveal": "silent",
+                "clear": true
+            },
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "api",
+            "command": "dotnet",
+            "type": "process",
+            "options": {
+                "cwd": "${workspaceFolder}/src/Infrastructure"
+            },
+            "args": ["watch", "--no-launch-profile", "--", "--urls", "https://*:5000", "--environment", "Development"],
+            "presentation": {
+                "panel": "new",
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "spa",
+            "command": "npm",
+            "type": "process",
+            "options": {
+                "cwd": "${workspaceFolder}/src/Presentation"
+            },
+            "args": [
+                "run",
+                "dev"
+            ],
+            "presentation": {
+                "panel": "new",
+                "reveal": "silent"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

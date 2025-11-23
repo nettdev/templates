@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Infrastructure/bin/Debug/net10.0/NameOverride.Infrastructure.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Infrastructure",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:5000"
+            },
+            "serverReadyAction": {
+                "action": "debugWithChrome",
+                "webRoot": "${workspaceFolder}/src/Presentation",
+                "pattern": "Now listening",
+                "uriFormat": "https://localhost:3000",
+                "killOnServerStop": true
+            }
+        },
+        {
+            "name": "spa",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}/src/Presentation",
+            "runtimeArgs": [
+                "run-script",
+                "dev"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "sourceMaps": true
+        }
+    ],
+    "compounds": [
+        {
+          "name": "launch",
+          "configurations": ["api", "spa"],
+          "stopAll": true
+        }
+    ]
+}

@@ -8,7 +8,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <Title>Nett Templates</Title>
     <Authors>Jeziel Moura</Authors>
-    <Description>Templates to use when creating an application for Nett Dev</Description>
+    <Description>Templates to use to develop application fast</Description>
     <PackageTags>dotnet-new;templates;clean architecture;domain drive design;solid</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/nettdev/templates</PackageProjectUrl>
@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <None Include="./README.md" Pack="true" PackagePath="/" />
-    <None Include="./icon.png" Pack="true" PackagePath="/" />
+    <None Include="./docs/icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
 </Project>

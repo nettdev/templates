@@ -1,10 +1,13 @@
 {
     "$schema": "http://json.schemastore.org/template",
-    "author": "Net Dev",
-    "classifications": [ "App", "Endpoints" ],
-    "identity": "Nett.Endpoint",
-    "name": "Nett endpoint template",
-    "shortName": "nett.endpoint",
+    "author": "Jeziel Moura",
+    "classifications": [ "App", "Project" ],
+    "identity": "Nett.Project",
+    "name": "Nett aggregate template",
+    "shortName": "nett.project",
+    "tags": {
+      "type": "project"
+    },
     "symbols": {
       "nameOverride":{
         "type": "derived",
@@ -12,12 +15,7 @@
         "valueTransform": "removeSpaces",
         "replaces": "NameOverride",
         "fileRename": "NameOverride",
-        "defaultValue": "SomeName"
-      },
-      "projectName": {
-        "type": "parameter",
-        "description": "Project name for the generated code",
-        "replaces": "ProjectNameOverride"
+        "defaultValue": "NameOverride"
       }
     },
     "forms": {
@@ -27,4 +25,4 @@
         "replacement": ""
       }
     }
-  }
+}

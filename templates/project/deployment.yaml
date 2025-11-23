@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: NameOverride
+  namespace: apps
+  labels:
+    app: NameOverride
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: NameOverride
+  template:
+    metadata:
+      labels:
+        app: NameOverride
+    spec:
+      containers:
+        - name: NameOverride
+          image: ghcr.io/nettdev/NameOverride:${GITHUB_SHA}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://collector.monitoring:4318"
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "http/protobuf"
+            - name: POSTGRES
+              value: ${POSTGRES}
+          resources:
+            requests:
+              cpu: 50m
+              memory: 100Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+      imagePullSecrets:
+            - name: ghcr
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: NameOverride
+  namespace: apps
+spec:
+  ports:
+    - port: 8080
+      name: http
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: NameOverride
+  sessionAffinity: None
+  type: ClusterIP
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: NameOverride
+  namespace: apps
+spec:
+  rules:
+    - host: NameOverride.nett.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  NameOverride
+                port:
+                  number: 8080
+---

@@ -1,0 +1,137 @@
+name: main
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: setup
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: build
+      run: dotnet build --configuration Release
+
+  unit:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v6
+    - name: setup
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+      
+    - name: test
+      run: dotnet test test/UnitTests
+
+  integration:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: get branch expiration date as an env variable
+      id: get-expiration-date
+      run: echo "EXPIRES_AT=$(date -u --date '+10 minutes' +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+    - uses: neondatabase/create-branch-action@v6
+      id: create-branch
+      with:
+        project_id: ${{ secrets.NEON_PROJECT_ID }}
+        branch_name: ${{ github.sha }}
+        api_key: ${{ secrets.NEON_API_KEY }}
+        expires_at: ${{ env.EXPIRES_AT }}
+
+    - uses: actions/checkout@v6
+    - name: setup
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: setup efcore
+      run: dotnet tool install --global dotnet-ef
+
+    - name: restore
+      run: dotnet restore
+      
+    - name: run migrations
+      env:
+        POSTGRES: "server=${{ steps.create-branch.outputs.db_host }};database=travel;username=neondb_owner;password=${{ steps.create-branch.outputs.password }}"
+      run: dotnet ef database update -p src/Infrastructure
+      
+    - name: test
+      env:
+        POSTGRES: "server=${{ steps.create-branch.outputs.db_host }};database=travel;username=neondb_owner;password=${{ steps.create-branch.outputs.password }}"
+      run: dotnet test test/IntegrationTests
+
+  push:
+    runs-on: ubuntu-latest
+    needs: [unit, integration]
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+
+    - name: setup
+      uses: docker/setup-buildx-action@v3
+
+    - name: login
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: build and push
+      uses: docker/build-push-action@v6
+      with:
+        tags: ghcr.io/nettdev/travel:${{ github.sha }}
+        context: .
+        push: true
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: push
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: migrations
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: setup efcore
+        run: dotnet tool install --global dotnet-ef
+
+      - name: restore
+        run: dotnet restore
+
+      - name: production migrations
+        run: dotnet ef database update -p src/Infrastructure --connection ${{ secrets.POSTGRES }}
+        
+      - name: set up Kubectl
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: set image sha
+        run: envsubst < deployment.yaml > deployment-updated.yaml
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          POSTGRES: ${{ secrets.POSTGRES }}
+
+      - name: deploy
+        run: kubectl apply -f deployment-updated.yaml
+
+      - name: restart
+        run: kubectl rollout restart deployment travel -n apps

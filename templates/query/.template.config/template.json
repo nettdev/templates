@@ -1,45 +1,26 @@
 {
     "$schema": "http://json.schemastore.org/template",
-    "author": "Net Dev",
+    "author": "Jeziel Moura",
     "classifications": [ "App", "Query" ],
     "identity": "Nett.Query",
-    "name": "Nett query template",
+    "name": "Nett Query template",
     "shortName": "nett.query",
     "symbols": {
-      "queryName":{
+      "nameDerived":{
         "type": "derived",
         "valueSource": "name",
         "valueTransform": "removeSpaces",
-        "replaces": "SomeOperation",
-        "fileRename": "SomeOperation",
-        "defaultValue": "SomeOperation"
+        "replaces": "NameOverride",
+        "fileRename": "NameOverride",
+        "defaultValue": "Name"
       },
-      "aggregateName":{
+      "projectName": {
         "type": "parameter",
-        "description": "The name of Aggregate code file and class.",
-        "datatype": "text",
-        "replaces": "AggregateName",
-        "fileRename": "AggregateName",
-        "defaultValue": "AggregateName"
-      },
-      "aggregateNameVar":{
-        "type": "derived",
-        "valueSource": "aggregateName",
-        "valueTransform": "first_lc",
-        "replaces": "AggregateNameVar",
-        "fileRename": "AggregateNameVar",
-        "defaultValue": "AggregateNameVar"
-      },
-      "namespace": {
-        "type": "parameter",
-        "description": "Namespace for the generated code",
-        "replaces": "NettDev.Namespace"
+        "description": "Project name for the generated code",
+        "replaces": "ProjectNameOverride"
       }
     },
     "forms": {
-      "first_lc": {
-        "identifier": "firstLowerCaseInvariant"
-      },
       "removeSpaces": {
         "identifier": "replace",
         "pattern": "\\ ",

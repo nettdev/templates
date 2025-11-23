@@ -1,0 +1,33 @@
+name: deploy
+on:
+  release:
+    types: [published, edited]
+    branches: [ main ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+
+    - name: nuget login
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: moura
+
+    - name: setup
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: dotnet pack
+      run: dotnet pack /p:PackageVersion=${{ github.ref_name }} -c Release -o ./dist
+
+    - name: nuget publish
+      run: dotnet nuget push "./dist/*.nupkg" --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
