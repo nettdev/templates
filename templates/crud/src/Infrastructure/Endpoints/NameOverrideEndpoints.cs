@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
-using Nett.BackOffice.Application.NameOverrides;
+using ProjectNameOverride.Application.NameOverrides;
 
 namespace ProjectNameOverride.Infrastructure.Endpoints;
 

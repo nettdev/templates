@@ -10,7 +10,7 @@ namespace NameOverride.Infrastructure.Extensions;
 [ExcludeFromCodeCoverage]
 public static class ServiceExtensions
 {
-    private const string ServiceName = "Travel";
+    private const string ServiceName = "NameOverride";
     private const string ServiceNamespace = "Apps";
     private const string DeploymentAttribute = "deployment.environment.name";
 

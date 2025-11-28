@@ -1,7 +1,7 @@
 using System.Net.Http.Json;
-using Nett.BackOffice.Application.NameOverrides;
+using NameOverride.Application.NameOverrides;
 
-namespace Nett.BackOffice.IntegrationTests.Endpoints;
+namespace NameOverride.IntegrationTests.Endpoints;
 
 [ExcludeFromCodeCoverage]
 public sealed class NameOverrideEndpointsTests(IntegrationAppFactory factory) : IClassFixture<IntegrationAppFactory>

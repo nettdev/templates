@@ -66,15 +66,15 @@ dotnet new nett.repository -n Post -p DemoProject
 
 ## Available Templates
 
-| Name | Command | Description |
-|------|---------|-------------|
-| Project | `dotnet new nett.project` | Full Clean Architecture solution with tests, Docker, CI |
-| Aggregate | `dotnet new nett.aggregate` | Domain Aggregate Root with Value Objects and Repository interface |
-| Command | `dotnet new nett.command` | CQRS Command without MediatR |
-| Query | `dotnet new nett.query` | CQRS Query without MediatR |
-| CRUD | `dotnet new nett.crud` | Full CRUD: Aggregate, Commands, Queries, Repository, Endpoint, Tests |
-| Endpoint | `dotnet new nett.endpoint` | Minimal API Endpoint group |
-| Repository | `dotnet new nett.repository` | EF Core Repository and Configuration |
+| Name       | Command                      | Description                                                          |
+|------------|------------------------------|----------------------------------------------------------------------|
+| Project    | `dotnet new nett.project`    | Full Clean Architecture solution with tests, Docker, CI              |
+| Aggregate  | `dotnet new nett.aggregate`  | Aggregate Root with Value Objects and Repository interface           |
+| Command    | `dotnet new nett.command`    | CQRS Command without MediatR                                         |
+| Query      | `dotnet new nett.query`      | CQRS Query without MediatR                                           |
+| CRUD       | `dotnet new nett.crud`       | Full CRUD: Aggregate, Commands, Queries, Repository, Endpoint, Tests |
+| Endpoint   | `dotnet new nett.endpoint`   | Minimal API Endpoint group                                           |
+| Repository | `dotnet new nett.repository` | EF Core Repository and Configuration                                 |
 
 ## Uninstall
 
