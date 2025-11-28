@@ -3,7 +3,7 @@
     "author": "Jeziel Moura",
     "classifications": [ "App", "Aggregate" ],
     "identity": "Nett.Aggregate",
-    "name": "Nett aggregate template",
+    "name": "Nett Aggregate Template",
     "shortName": "nett.aggregate",
     "symbols": {
       "nameDerived":{

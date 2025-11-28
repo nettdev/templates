@@ -3,7 +3,7 @@
     "author": "Net Dev",
     "classifications": [ "App", "Endpoints" ],
     "identity": "Nett.Endpoint",
-    "name": "Nett endpoint template",
+    "name": "Nett Endpoint Template",
     "shortName": "nett.endpoint",
     "symbols": {
       "nameOverride":{

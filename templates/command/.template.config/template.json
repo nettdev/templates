@@ -3,7 +3,7 @@
     "author": "Jeziel Moura",
     "classifications": [ "App", "Command" ],
     "identity": "Nett.Command",
-    "name": "Nett command template",
+    "name": "Nett Command Template",
     "shortName": "nett.command",
     "tags": {
       "type": "item"

@@ -3,7 +3,7 @@
     "author": "Jeziel Moura",
     "classifications": [ "App", "Repository" ],
     "identity": "Nett.Repository",
-    "name": "Nett Repository template",
+    "name": "Nett Repository Template",
     "shortName": "nett.repository",
     "symbols": {
       "nameDerived":{

@@ -3,7 +3,7 @@
     "author": "Jeziel Moura",
     "classifications": [ "App", "Query" ],
     "identity": "Nett.Query",
-    "name": "Nett Query template",
+    "name": "Nett Query Template",
     "shortName": "nett.query",
     "symbols": {
       "nameDerived":{

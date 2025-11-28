@@ -14,16 +14,9 @@ public static class ServiceExtensions
     private const string ServiceNamespace = "Apps";
     private const string DeploymentAttribute = "deployment.environment.name";
 
-    public static void ConfigureEntityFramework(this IServiceCollection services, IConfiguration configuration)
+    public static void ConfigureEntityFramework(this IServiceCollection services)
     {
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(configuration["POSTGRES"]);
-        dataSourceBuilder.EnableDynamicJson();
-        var dataSource = dataSourceBuilder.Build();
-
-        services.AddDbContext<AppDbContext>(builder => 
-            builder.UseNpgsql(dataSource, options => 
-                options.EnableRetryOnFailure(5)));
-
+        services.AddDbContext<AppDbContext>();
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AppDbContext>());
     }
 

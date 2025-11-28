@@ -3,7 +3,7 @@
     "author": "Jeziel Moura",
     "classifications": [ "App", "Crud" ],
     "identity": "Nett.Crud",
-    "name": "Nett Crud template",
+    "name": "Nett Crud Template",
     "shortName": "nett.crud",
     "symbols": {
       "nameDerived":{
