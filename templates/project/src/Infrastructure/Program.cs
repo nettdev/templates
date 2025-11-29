@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
+builder.Services.ConfigureAuthentication();
 builder.Services.ConfigureEntityFramework();
 builder.Services.ConfigureTelemetry(builder.Environment);
 

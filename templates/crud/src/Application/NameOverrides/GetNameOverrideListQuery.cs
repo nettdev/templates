@@ -15,7 +15,7 @@ public sealed class GetNameOverrideListRequest : PagedRequest<NameOverride, GetN
     }
 
     public override Expression<Func<NameOverride, GetNameOverrideListResponse>> ToProjection() =>
-        x => new NameOverrideResponse(x.Name);
+        x => new GetNameOverrideResponse(x.Id, x.Name);
 }
 
 public sealed class GetNameOverrideListQuery(INameOverrideRepository repository)
@@ -24,9 +24,9 @@ public sealed class GetNameOverrideListQuery(INameOverrideRepository repository)
 
     public async Task<PagedResponse<GetNameOverrideListResponse>> Execute(GetNameOverrideListRequest request, CancellationToken cancellation = default)
     {
-        var response = await repo.Query(request, cancellation);
+        var response = await _repository.Query(request, cancellation);
         return response;
     }
 }
 
-public record GetNameOverrideListResponse(string Name);
+public record GetNameOverrideListResponse(Guid Id, string Name);

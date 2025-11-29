@@ -41,13 +41,13 @@
       },
       "valueObjectField": {
         "type": "derived",
-        "valueSource": "valueObjectName",
+        "valueSource": "valueObject",
         "valueTransform": "first_lc",
         "replaces": "ValueObjectFieldOverride"
       },
       "enumerationField": {
         "type": "derived",
-        "valueSource": "enumerationOverride",
+        "valueSource": "enumeration",
         "valueTransform": "first_lc",
         "replaces": "EnumerationFieldOverride"
       }

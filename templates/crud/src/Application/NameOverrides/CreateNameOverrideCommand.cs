@@ -7,21 +7,21 @@ public sealed class CreateNameOverrideCommand(INameOverrideRepository repository
     private readonly INameOverrideRepository _repository = repository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<Result<GetNameOverrideListResponse>> Execute(CreateNameOverrideRequest request, CancellationToken cancellation)
+    public async Task<Result<CreateNameOverrideResponse>> Execute(CreateNameOverrideRequest request, CancellationToken cancellation)
     {
         var NameFieldOverrideResult = NameOverride.Create(request.Name);
 
         if (NameFieldOverrideResult.IsFailure)
-            return result.Error;
+            return NameFieldOverrideResult.Error!;
 
-        await _repository.Add(result.Value);
+        await _repository.Add(NameFieldOverrideResult.Value);
 
-        var commitResult = await _unitOfWork(cancellation);
+        var commitSuccess = await _unitOfWork.Commit(cancellation);
         
-        if (commitResult.IsFailure)
-            return commitResult.Error;
+        if (!commitSuccess)
+            return new Error { Message = "Error saving changes", Code = "Database.Error" };
         
-        return new NameOverrideResponse(result.Value.Id);
+        return new CreateNameOverrideResponse(result.Value.Id);
     }
 }
 

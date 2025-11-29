@@ -20,6 +20,12 @@ public static class ServiceExtensions
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AppDbContext>());
     }
 
+    public static void ConfigureAuthentication(this IServiceCollection services)
+    {
+        services.AddAuthorization();
+        services.AddAuthentication();
+    }
+
     public static void ConfigureTelemetry(this IServiceCollection services, IWebHostEnvironment environment)
     {
         services.AddSingleton(TracerProvider.Default.GetTracer(ServiceName));

@@ -7,16 +7,16 @@ public sealed class DeleteNameOverrideCommand(INameOverrideRepository repository
     private readonly INameOverrideRepository _repository = repository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<Result<GetNameOverrideListResponse>> Execute(DeleteNameOverrideRequest request, CancellationToken cancellation)
+    public async Task<Result<DeleteNameOverrideResponse>> Execute(DeleteNameOverrideRequest request, CancellationToken cancellation)
     {
         await _repository.Delete(request.Id);
 
-        var commitResult = await _unitOfWork(cancellation);
+        var commitSuccess = await _unitOfWork.Commit(cancellation);
         
-        if (commitResult.IsFailure)
-            return commitResult.Error;
+        if (!commitSuccess)
+            return new Error { Message = "Error saving changes", Code = "Database.Error" };
         
-        return new NameOverrideResponse($"NameOverride with id {request.Id} deleted");
+        return new DeleteNameOverrideResponse($"NameOverride with id {request.Id} deleted");
     }
 }
 

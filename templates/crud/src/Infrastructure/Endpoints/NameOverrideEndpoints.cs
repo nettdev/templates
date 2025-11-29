@@ -11,7 +11,7 @@ public static class NameOverrideEndpoints
         builder.MapGet("/{id}", [Authorize] async (GetNameOverrideQuery query, Guid id, CancellationToken cancellation) =>
         {
             var result = await query.Execute(new GetNameOverrideRequest(id), cancellation);
-            return result.Match<Results<Ok<GetNameOverrideResponse>, BadRequest<Error>>>((data) => Ok(data), (error) => NotFound(error));
+            return result.Match<Results<Ok<GetNameOverrideResponse>, NotFound<Error>>>((data) => Ok(data), (error) => NotFound(error));
         });
 
         builder.MapGet("/", [Authorize] async (GetNameOverrideListQuery query, [AsParameters] GetNameOverrideListRequest request, CancellationToken cancellation) =>

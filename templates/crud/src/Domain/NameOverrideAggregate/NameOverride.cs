@@ -32,7 +32,7 @@ public sealed class NameOverride : AggregateRoot
             .Build(() => new NameOverride { Name = name, EnumerationOverride = EnumerationFieldOverride });
     }
     #else
-    public static Result<NameOverride> Create(string name)
+    public static Result<NameOverride, Error> Create(string name)
     {
         return ParameterRuleBuilder
             .RuleFor(() => name).NotEmpty()
