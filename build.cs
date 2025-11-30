@@ -2,6 +2,7 @@
 
 var target = Argument<string>("target");
 var version = Argument<string>("packageVersion");
+var apikey = Argument<string>("apikey");
 
 Information(target);
 Information(version);
@@ -25,7 +26,7 @@ Task("Publish").IsDependentOn("Pack").Does(() =>
     DotNetNuGetPush("./dist/*.nupkg", new DotNetNuGetPushSettings
     {
         Source = "https://git.nett.dev/api/packages/nett/nuget/index.json",
-        ApiKey = EnvironmentVariable("NUGET_API_KEY")
+        ApiKey = apikey
     });
 
     DeleteDirectory("./dist", new() { Recursive = true });
