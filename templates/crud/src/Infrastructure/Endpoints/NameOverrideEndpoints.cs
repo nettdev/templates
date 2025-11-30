@@ -34,7 +34,7 @@ public static class NameOverrideEndpoints
 
         builder.MapDelete("/{id:guid}", [Authorize] async (DeleteNameOverrideCommand command, Guid id, CancellationToken cancellation) =>
         {
-            var result  = await command.Execute(new DeleteNameOverrideRequest{ Id = id }, cancellation);
+            var result  = await command.Execute(new DeleteNameOverrideRequest(id), cancellation);
             return result.Match<Results<Ok<DeleteNameOverrideResponse>, BadRequest<Error>>>((data) => Ok(data), (error) => BadRequest(error)); 
         });
     }

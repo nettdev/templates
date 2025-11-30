@@ -11,27 +11,27 @@ public sealed class NameOverrideRepository(AppDbContext dbContext) : Repository<
         [nameof(NameOverride.Name)] = p => p.Name,
     };
     
-    public async Task<NameOverride?> Find(Guid id)
+    public async Task<NameOverride?> Find(Guid id, CancellationToken cancellation = default)
     {
-        return await _dbSet.FindAsync(id);
+        return await _dbSet.FindAsync(id, cancellation);
     }
 
-    public async Task Add(NameOverride NameFieldOverride)
+    public async Task Add(NameOverride NameFieldOverride, CancellationToken cancellation = default)
     {
-        await _dbSet.AddAsync(NameFieldOverride);
+        await _dbSet.AddAsync(NameFieldOverride, cancellation);
     }
     
-    public async Task Update(NameOverride NameFieldOverride)
+    public async Task Update(NameOverride NameFieldOverride, CancellationToken cancellation = default)
     {
         _dbSet.Update(NameFieldOverride);
         await Task.CompletedTask;
     }
 
-    public async Task Delete(Guid id)
+    public async Task Delete(Guid id, CancellationToken cancellation = default)
     {
-        if (await Find(id) is {} NameFieldOverride)
+        if (await Find(id, cancellation) is {} NameFieldOverride)
         {
-            _dbSet.Delete(NameFieldOverride);
+            _dbSet.Remove(NameFieldOverride);
         }
     }
 }

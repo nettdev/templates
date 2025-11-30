@@ -9,7 +9,7 @@ public sealed class CreateNameOverrideCommand(INameOverrideRepository repository
 
     public async Task<Result<CreateNameOverrideResponse>> Execute(CreateNameOverrideRequest request, CancellationToken cancellation)
     {
-        var NameFieldOverrideResult = NameOverride.Create(request.Name);
+        var NameFieldOverrideResult = NameOverride.Create(Guid.CreateVersion7(), request.Name, new(""), UserType.None);
 
         if (NameFieldOverrideResult.IsFailure)
             return NameFieldOverrideResult.Error!;
@@ -21,7 +21,7 @@ public sealed class CreateNameOverrideCommand(INameOverrideRepository repository
         if (!commitSuccess)
             return new Error { Message = "Error saving changes", Code = "Database.Error" };
         
-        return new CreateNameOverrideResponse(result.Value.Id);
+        return new CreateNameOverrideResponse(NameFieldOverrideResult.Value.Id);
     }
 }
 

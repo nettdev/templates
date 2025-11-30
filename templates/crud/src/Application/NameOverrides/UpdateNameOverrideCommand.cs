@@ -9,7 +9,7 @@ public sealed class UpdateNameOverrideCommand(INameOverrideRepository repository
 
     public async Task<Result<UpdateNameOverrideResponse>> Execute(UpdateNameOverrideRequest request, CancellationToken cancellation)
     {
-        var NameFieldOverrideResult = NameOverride.Create(request.Name, id: Id);
+        var NameFieldOverrideResult = Create(request.Id, request.Name, new(""), UserType.None);
 
         if (NameFieldOverrideResult.IsFailure)
             return NameFieldOverrideResult.Error;

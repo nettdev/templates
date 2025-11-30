@@ -15,7 +15,7 @@ public sealed class GetNameOverrideListRequest : PagedRequest<NameOverride, GetN
     }
 
     public override Expression<Func<NameOverride, GetNameOverrideListResponse>> ToProjection() =>
-        x => new GetNameOverrideResponse(x.Id, x.Name);
+        x => new GetNameOverrideListResponse(x.Id, x.Name);
 }
 
 public sealed class GetNameOverrideListQuery(INameOverrideRepository repository)
