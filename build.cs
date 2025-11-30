@@ -24,7 +24,7 @@ Task("Publish").IsDependentOn("Pack").Does(() =>
 {
     DotNetNuGetPush("./dist/*.nupkg", new DotNetNuGetPushSettings
     {
-        Source = "https://api.nuget.org/v3/index.json",
+        Source = "https://git.nett.dev/api/packages/nett/nuget/index.json",
         ApiKey = EnvironmentVariable("NUGET_API_KEY")
     });
 
